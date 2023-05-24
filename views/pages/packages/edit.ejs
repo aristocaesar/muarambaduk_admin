@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <div class="social-dash-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('edit-product-title') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/products"><i class="las la-home"></i>Produk</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('edit-product-title') %></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <% if(notification.length != 0) { %>
+                    <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                        <div class="alert-content">
+                            <p><%= notification[0].message %></p>
+                        </div>
+                    </div>
+                <% } %>
+
+                <div class="card card-Vertical card-default card-md mb-4">
+                    <div class="card-body pb-md-30">
+                        <div class="Vertical-form">
+                            <form action="" method="post">
+                                <div class="account-profile d-flex align-items-center mt-4 mb-5">
+                                    <div class="ap-img pro_img_wrapper">
+                                        <input id="image-file-upload" type="text" name="image" value="<%= product.image %>" class="d-none">
+                                        <input id="file-upload" type="file" class="d-none">
+                                        <label for="file-upload">
+                                            <img class="ap-img__main rounded-circle wh-120 bg-lighter d-flex" src="<%= product.image %>" alt="profile">
+                                            <span class="cross" id="remove_pro_pic">
+                                                <img src="<%- locals.base %>img/svg/camera.svg" alt="camera" class="svg">
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="account-profile__title">
+                                        <h6 class="fs-15 ms-20 fw-500 text-capitalize">Foto produk</h6>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Nama Produk</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="title" placeholder="Tenda Premium 4 Orang" value="<%= product.title %>" oninput="productSetSlug(this)" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="slug" class="color-dark fs-14 fw-500 align-center mb-10">Slug</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="slug" name="slug" placeholder="tenda-premium-4-orang" value="<%= product.slug %>" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="color-dark fs-14 fw-500 align-center mb-10">Deskripsi</label>
+                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="Tenda premium 4 orang merupakan ..." required><%= product.description %></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price" class="color-dark fs-14 fw-500 align-center mb-10">Harga Sewa</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="price" name="price" placeholder="Rp. 60.000" oninput="toRupiah(this)" value="<%= product.price %>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="compensation" class="color-dark fs-14 fw-500 align-center mb-10">Harga Ganti Rugi</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="compensation" name="compensation" placeholder="Rp. 250.000" oninput="toRupiah(this)" value="<%= product.compensation %>" required>
+                                </div>
+                                <div class="layout-button flex justify-content-end mt-25">
+                                    <a href="<%- locals.base %>products" class="btn btn-default btn-squared btn-light px-35 ">Batal</a>
+                                    <button type="submit" class="btn btn-primary btn-default btn-squared px-30">Simpan Perubahan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

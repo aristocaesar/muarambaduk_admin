@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="breadcrumb-main">
+                <h4 class="text-capitalize breadcrumb-title">Frequently Asked Questions ( FAQ )</h4>
+                <div class="breadcrumb-action justify-content-center flex-wrap">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="las la-home"></i>Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Frequently Asked Questions</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <% if(notification.length != 0) { %>
+            <div class="col-lg-12 mb-3">
+                <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                    <div class="alert-content">
+                        <p><%= notification[0].message %></p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <div class="col-lg-12">
+            <div class="mb-30">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade  show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <div class="card h-100 shadow-lg pb-md-50 pb-30 mb-md-50 mb-30">
+                            <div class="card-header px-30 pt-30 pb-25 border-bottom-0">
+                                <h4 class="fw-500">Penggunaan Website</h4>
+                                <a href="<%- locals.base %>faq/add" class="btn px-15 btn-primary">
+                                    <i class="las la-plus fs-16"></i>Buat Faq</a>
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="application-faqs">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <% for(let i = 0; faqs.length > i; i++){ %>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingOne">
+                                                    <h4 class="panel-title">
+                                                        <a data-bs-toggle="collapse" data-parent="#accordion" href="#collapseOne-<%= i %>" aria-expanded="true" aria-controls="collapseOne">
+                                                            <%= faqs[i].title %>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseOne-<%= i %>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                                    <div class="panel-body">
+                                                        <p class="mb-sm-35 mb-20">
+                                                            <%= faqs[i].description%>
+                                                        </p>
+                                                        <div class="button-group d-flex justify-content-end mt-2">
+                                                            <a href="<%- locals.base %>faq/edit/<%= faqs[i].id %>" class="btn btn-default btn-squared color-primary px-15 btn-outline-primary px-15"><i class="uil uil-edit"></i>
+                                                                Edit
+                                                            </a>
+                                                            <a href="#" class="m-2 btn btn-default btn-squared color-light px-15 btn-outline-light px-15" data-bs-toggle="modal" data-bs-target="#modal-info-delete" onclick="
+                                                                document.getElementById('form-action-delete').setAttribute('action', '<%- locals.base %>faq/delete/<%= faqs[i].id %>')
+                                                                document.getElementById('title-faq-action-delete').innerText = `Apakah anda ingin menghapus faq '<%= faqs[i].title %>' ?`; 
+                                                            "><i class="uil uil-trash-alt"></i>
+                                                                Hapus
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-info-delete modal fade show" id="modal-info-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <form id="form-action-delete" action="" method="post">
+                <div class="modal-body">
+                    <div class="modal-info-body d-flex">
+                        <div class="modal-info-icon warning">
+                            <img src="<%- locals.base %>img/svg/alert-circle.svg" alt="alert-circle" class="svg">
+                        </div>
+                        <div class="modal-info-text">
+                            <h6 id="title-faq-action-delete">Apakah anda ingin menghapus faq ini ?</h6>
+                            <p>Setelah terhapus, faq tidak dapat dikembalikan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-outlined btn-sm" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Ya, Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

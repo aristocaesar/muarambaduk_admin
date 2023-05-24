@@ -1,0 +1,171 @@
+<div class="profile-setting ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('setting-menu-title') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/dashboard"><i class="las la-home"></i>Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('setting-menu-title') %></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <% if(notification.length != 0) { %>
+                    <div class="col-lg-12 mb-3">
+                            <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                                <div class="alert-content">
+                                    <p><%= notification[0].message %></p>
+                                </div>
+                            </div>
+                    </div>
+                <% } %>
+            </div>
+            <div class="col-xxl-3 col-lg-4 col-sm-5">
+                <div class="card mb-25">
+                    <div class="card-body text-center p-0">
+                        <div class="account-profile border-bottom pt-25 px-25 pb-0 flex-column d-flex align-items-center ">
+                            <div class="ap-img mb-20 pro_img_wrapper">
+                                <label for="file-upload">
+                                    <img class="ap-img__main rounded-circle wh-120" src="<%- locals.base %>img/author-nav.png" alt="profile">
+                                </label>
+                            </div>
+                            <div class="ap-nameAddress pb-3">
+                                <h5 class="ap-nameAddress__title"><%- session.name %></h5>
+                                <p class="ap-nameAddress__subTitle fs-14 m-0"><%= session.role == 'master' ? 'Administrator' : 'Staf' %></p>
+                            </div>
+                        </div>
+                        <div class="ps-tab p-20 pb-25">
+                            <div class="nav flex-column text-start" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                    <img src="<%- locals.base %>img/svg/user.svg" alt="user" class="svg">Edit profil</a>
+                                <a class="nav-link" id="v-pills-email-tab" data-bs-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                                    <img src="<%- locals.base %>img/svg/mail.svg" alt="setting" class="svg">Ganti Email</a>
+                                <a class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                                    <img src="<%- locals.base %>img/svg/key.svg" alt="key" class="svg">Ganti Password</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-9 col-lg-8 col-sm-7">
+                <div class="mb-50">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade  show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div class="edit-profile">
+                                <div class="card">
+                                    <div class="card-header px-sm-25 px-3">
+                                        <div class="edit-profile__title">
+                                            <h6>Edit Profil</h6>
+                                            <span class="fs-13 color-light fw-400">Informasi Pribadi</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <div class="edit-profile__body mx-lg-20">
+                                                    <form action="<%- locals.base %>setting/<%= session.id %>" method="post">
+                                                        <div class="form-group mb-20">
+                                                            <label for="names">Nama Lengkap</label>
+                                                            <input type="text" class="form-control" id="names" name="fullname" placeholder="Aristo Caesar Pratama" value="<%- session.name %>">
+                                                        </div>
+                                                        <div class="button-group d-flex justify-content-end pt-30 mb-15">
+                                                            <button type="submit" class="btn btn-primary btn-default btn-squared me-15 text-capitalize btn-sm">Simpan Perubahan
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-email-tab">
+                            <div class="edit-profile">
+                                <div class="card">
+                                    <div class="card-header  px-sm-25 px-3">
+                                        <div class="edit-profile__title">
+                                            <h6>Ganti Email</h6>
+                                            <span class="fs-13 color-light fw-400">Perbarui email</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <div class="edit-profile__body mx-lg-20">
+                                                    <form action="<%- locals.base %>setting/<%= session.id %>" method="post">
+                                                        <div class="form-group mb-20">
+                                                            <label for="password-field">Email Sekarang</label>
+                                                            <div class="position-relative">
+                                                                <input id="password-field" type="text" class="form-control pe-50" placeholder="Masukkan email sekarang" value="<%= session.email %>" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mb-1">
+                                                            <label for="password-field">Email Baru</label>
+                                                            <div class="position-relative">
+                                                                <input id="password-field" type="text" class="form-control pe-50" name="email" placeholder="Masukkan email baru">
+                                                            </div>
+                                                        </div>
+                                                        <div class="button-group d-flex justify-content-end pt-45 mb-35">
+                                                            <button type="submit" class="btn btn-primary btn-default btn-squared me-15 text-capitalize">Simpan Perubahan
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                            <div class="edit-profile">
+                                <div class="card">
+                                    <div class="card-header  px-sm-25 px-3">
+                                        <div class="edit-profile__title">
+                                            <h6>Ganti Password</h6>
+                                            <span class="fs-13 color-light fw-400">Ganti atau Reset password</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row justify-content-center">
+                                            <div class="col-12">
+                                                <div class="edit-profile__body mx-lg-20">
+                                                    <form action="<%- locals.base %>setting/<%= session.id %>" method="post">
+                                                        <div class="form-group mb-20">
+                                                            <label for="password-field">Password Lama</label>
+                                                            <div class="position-relative">
+                                                                <input id="password-field" type="password" class="form-control pe-50" name="old_password" placeholder="Masukkan password lama">
+                                                                <span class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mb-1">
+                                                            <label for="password-field">Password Baru</label>
+                                                            <div class="position-relative">
+                                                                <input id="password-field" type="password" class="form-control pe-50" name="new_password" placeholder="Masukkan password baru">
+                                                                <span class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button-group d-flex justify-content-end pt-45 mb-35">
+                                                            <button type="submit" class="btn btn-primary btn-default btn-squared me-15 text-capitalize">Simpan Perubahan
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

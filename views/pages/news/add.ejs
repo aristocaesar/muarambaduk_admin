@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="social-dash-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('news-menu-title') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/news"><i class="las la-home"></i>Berita</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Buat Berita</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <% if(notification.length != 0) { %>
+                    <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                        <div class="alert-content">
+                            <p><%= notification[0].message %></p>
+                        </div>
+                    </div>
+                <% } %>
+
+                <div class="card card-Vertical card-default card-md mb-4">
+                    <div class="card-body pb-md-30">
+                        <div class="Vertical-form">
+                            <form action="" method="post">
+                                <div class="account-profile d-flex align-items-center mt-4 mb-5">
+                                    <div class="ap-img pro_img_wrapper">
+                                        <input id="image-file-upload" type="text" name="thumbnail" value="https://api.muarambaduk.biz.id/static/uploads/default-package.png" class="d-none">
+                                        <input id="file-upload" type="file" class="d-none">
+                                        <label for="file-upload">
+                                            <img class="ap-img__main rounded-circle wh-120 bg-lighter d-flex" src="https://api.muarambaduk.biz.id/static/uploads/default-product.png" alt="profile">
+                                            <span class="cross" id="remove_pro_pic">
+                                                <img src="<%- locals.base %>img/svg/camera.svg" alt="camera" class="svg">
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="account-profile__title">
+                                        <h6 class="fs-15 ms-20 fw-500 text-capitalize">Foto Berita</h6>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Judul Berita</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="title" placeholder="Yuk Liburan ke Wisata alam Muara Mbaduk" oninput="productSetSlug(this)" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="slug" class="color-dark fs-14 fw-500 align-center mb-10">Slug</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="slug" name="slug" placeholder="yuk-liburan-ke-wisata-alam-muara-mbaduk" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="body" class="color-dark fs-14 fw-500 align-center mb-10">Isi Berita</label>
+                                    <div class="bg-white mb-25 radius-xl">
+                                        <div class="reply-form pt-0">
+                                                <div class="mailCompose-form-content">
+                                                    <div class="form-group">
+                                                        <textarea name="body" id="mail-reply-message2" class="form-control-lg" placeholder=" Muara mbaduk merupakan wisata ..."></textarea>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" class="d-none" name="author" value="<%- session.id %>">
+                                <div class="layout-button flex justify-content-end mt-25">
+                                    <a href="<%- locals.base %>news" class="btn btn-default btn-squared btn-light px-35 ">Batal</a>
+                                    <button type="submit" class="btn btn-primary btn-default btn-squared px-30">Simpan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,179 @@
+<div class="sidebar sidebar-collapse" id="sidebar">
+    <div class="sidebar__menu-group">
+        <ul class="sidebar_nav">
+            <li>
+                <a href="<%- locals.base %>dashboard" class="<%- name === 'demo_one' ? 'active':'' %>">
+                <span class="nav-icon uil uil-create-dashboard"></span>
+                <span class="menu-text"><%- __('dashboard-menu-title') %></span>
+                </a>
+            </li>
+            <li class="has-child <%- name === 'Produk' || name === 'Daftar Produk' || name === 'Tambah Produk' || name === 'Edit Produk' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Produk' || name === 'Daftar Produk' || name === 'Tambah Produk' || name === 'Edit Produk' ?'active':'' %>">
+                    <span class="nav-icon uil uil-package"></span>
+                    <span class="menu-text"><%- __('product-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>products" class="<%- name === 'Daftar Produk' ?'active':'' %>"><%- __('list-product-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>products/add" class="<%- name === 'Tambah Produk' ?'active':'' %>"><%- __('add-product-title') %></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-child <%- name === 'Paket' || name === 'Daftar Paket' || name === 'Tambah Paket' || name === 'Edit Paket' || name === 'Kustom Paket' || name === 'Review Paket' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Paket' || name === 'Daftar Paket' || name === 'Tambah Paket' || name === 'Edit Paket' || name === 'Kustom Paket' || name === 'Review Paket' ?'active':'' %>">
+                    <span class="nav-icon uil uil-layers"></span>
+                    <span class="menu-text"><%- __('packages-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>packages" class="<%- name === 'Daftar Paket' ?'active':'' %>"><%- __('list-packages-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>packages/add" class="<%- name === 'Tambah Paket' ?'active':'' %>"><%- __('add-packages-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>packages/custom" class="<%- name === 'Custom Paket' ?'active':'' %>"><%- __('custom-packages-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>packages/review" class="<%- name === 'Review Paket' ?'active':'' %>"><%- __('review-packages-title') %></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-child <%- name === 'Tiket' || name === 'Daftar Tiket' || name === 'Tambah Tiket' || name === 'Edit Tiket' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Tiket' || name === 'Daftar Tiket' || name === 'Tambah Tiket' || name === 'Edit Tiket' ?'active':'' %>">
+                    <span class="nav-icon uil uil-ticket"></span>
+                    <span class="menu-text"><%- __('tickets-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>tickets" class="<%- name === 'Daftar Tiket' ?'active':'' %>"><%- __('tickets-list') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>tickets/add" class="<%- name === 'Tambah Tiket' ?'active':'' %>"><%- __('tickets-add') %></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-child <%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Buat Transaksi' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Buat Transaksi' ?'active':'' %>">
+                    <span class="nav-icon uil uil-credit-card"></span>
+                    <span class="menu-text"><%- __('transaction-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>transaction" class="<%- name === 'Daftar Transaksi' ?'active':'' %>"><%- __('list-transaction-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>transaction/add" class="<%- name === 'Buat Transaksi' ?'active':'' %>"><%- __('add-transaction-title') %></a>
+                    </li>
+                    <li>
+                        <a href="https://dashboard.midtrans.com/login" target="_blank">Monitor Pembayaran</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-child <%- name === 'Pengguna' || name == 'Daftar Pengguna' ?'open':'' %>">
+                <a href="#" class="<%- name === 'Pengguna' || name == 'Daftar Pengguna' ?'active':'' %>">
+                    <span class="nav-icon uil uil-users-alt"></span>
+                    <span class="menu-text"><%- __('user-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>users/" class="<%- name === 'Daftar Pengguna' ?'active':'' %>"><%- __('user-list') %></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-child <%- name === 'Berita' || name === 'Daftar Berita' || name === 'Buat Berita' || name === 'Edit Berita' ?'open':'' %>">
+                <a href="#" class="<%- name === 'Berita' || name === 'Daftar Berita' || name === 'Buat Berita' || name === 'Edit Berita' ?'active':'' %>">
+                    <span class="nav-icon uil uil-newspaper"></span>
+                    <span class="menu-text"><%- __('news-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>news/" class="<%- name === 'Daftar Berita' ?'active':'' %>"><%- __('news-list') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>news/add" class="<%- name === 'Buat Berita' ?'active':'' %>"><%- __('news-add') %></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="has-child <%- name === 'Halaman' || name === 'Daftar Halaman' || name === 'Tambah Halaman' || name === 'Edit Halaman' ?'open':'' %>">
+                <a href="#" class="<%- name === 'Halaman' || name === 'Daftar Halaman' || name === 'Tambah Halaman' || name === 'Edit Halaman' ?'active':'' %>">
+                    <span class="nav-icon uil uil-copy-alt"></span>
+                    <span class="menu-text"><%- __('pages-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>pages/" class="<%- name === 'Daftar Halaman' ?'active':'' %>"><%- __('news-list') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>pages/add" class="<%- name === 'Tambah Halaman' ?'active':'' %>"><%- __('news-add') %></a>
+                    </li>
+                </ul>
+            </li>
+
+            <% if(session.role == 'master') { %>
+            <li class="has-child <%- name === 'Halaman' || name === 'Daftar Admin' || name === 'Tambah Admin' || name === 'Edit Admin' ?'open':'' %>">
+                <a href="#" class="<%- name === 'Halaman' || name === 'Daftar Admin' || name === 'Tambah Admin' || name === 'Edit Admin' ?'active':'' %>">
+                    <span class="nav-icon uil uil-user-md"></span>
+                    <span class="menu-text"><%- __('admin-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>admin/" class="<%- name === 'Daftar Admin' ?'active':'' %>"><%- __('admin-list-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>admin/add" class="<%- name === 'Tambah Admin' ?'active':'' %>"><%- __('admin-add-title') %></a>
+                    </li>
+                </ul>
+            </li>
+            <% } %>
+            
+            <li>
+                <a href="<%- locals.base %>filemanager" class="<%- name === 'filemanager' ?'active':'' %>">
+                    <span class="nav-icon uil uil-repeat"></span>
+                    <span class="menu-text"><%- __('filemanager-menu-title') %></span>
+                </a>
+            </li>
+
+            <li class="has-child <%- name === 'Faq' || name === 'Daftar Faq' || name === 'Tambah Faq' || name === 'Edit Faq' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Faq' || name === 'Daftar Faq' || name === 'Tambah Faq' || name === 'Edit Faq' ?'active':'' %>">
+                    <span class="nav-icon uil uil-comment-question"></span>
+                    <span class="menu-text"><%- __('faq-menu-title') %></span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="<%- locals.base %>faq" class="<%- name === 'Daftar Faq' ?'active':'' %>"><%- __('faq-list-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>faq/add" class="<%- name === 'Tambah Faq' ?'active':'' %>"><%- __('faq-add-title') %></a>
+                    </li>
+                    <li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="<%- locals.base %>about" class="<%- name === 'Tentang' ? 'active':'' %>">
+                    <span class="nav-icon uil uil-info-circle"></span>
+                    <span class="menu-text"><%- __('tentang-menu-title') %></span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="dm-page-content">
+    <div class="container-fluid">
+        <div class="fileM-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-main">
+                        <h4 class="text-capitalize breadcrumb-title"><%- __('filemanager-menu-title') %></h4>
+                        <div class="breadcrumb-action justify-content-center flex-wrap">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#"><i class="las la-file"></i>File Manager</a></li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="fileM-contents">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="fileM-grid-wrapper mb-30 ">
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                            <div class="fileM-wrapper">
+                                                <div class="fileM-top-search">
+                                                    <form action="" method="get" class="d-flex align-items-center">
+                                                        <img src="<%- locals.base %>img/svg/search.svg" alt="search" class="svg">
+                                                        <input class="form-control px-10 border-0 box-shadow-none" type="search" name="search" value="<%= keyword %>" placeholder="Cari berdasarkan nama" aria-label="Search">
+                                                    </form>
+                                                    <div class="project-icon-selected">
+                                                        <div class="listing-social-link pb-lg-0 pb-xs-2">
+                                                            <div class="icon-list-social d-flex">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dm-upload">
+                                                        <div class="dm-upload__button">
+                                                            <a href="javascript:void(0)" class="btn btn-lg btn-primary btn-upload" onclick="$('#upload-1').click()"> <img class="svg" src="<%- locals.base %>img/svg/upload.svg" alt="upload"> Upload Berkas</a>
+                                                            <input type="file" name="upload-1" class="upload-one" id="upload-1" onchange="uploadFile(this)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>NamaFile.png</p>
+                                                <div class="progress-wrap d-flex align-items-center mb-15">
+                                                    <div class="progress">
+                                                        <div id="progress-bar-upload-filemanager" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <span class="progress-percentage">60%</span>
+                                                    <span class="progress-icon"><img src="<%- locals.base %>img/svg/check-circle.svg" alt="check-circle" class="svg color-success"></span>
+                                                </div>
+                                            </div>
+                                            <div class="fileM-wrapper">
+                                                <h6 class="fileM-wrapper__title">Berkas Terbaru</h6>
+                                                <div class="row">
+                                                    <% if (files.length === 0) { %>
+                                                        <p class="mt-3">Tidak ada berkas</p>
+                                                    <% }else{ %>
+                                                        <% for(var index=0; index < files.length; index++) { %>
+                                                            <div class="col-xl-3 col-lg-4 col-sm-6">
+                                                            <div class="fileM-single mb-25">
+                                                                <div class="fileM-card ">
+                                                                    <div class="card border-0">
+                                                                        <div class="card-body pb-40 pt-45">
+                                                                            <div class="fileM-img">
+                                                                                <img class="wh-50" src="<%= files[index].url %>" alt="">
+                                                                            </div>
+                                                                            <p class="fileM-excerpt"><%= files[index].filename %></p>
+                                                                            <div class="fileM-action">
+                                                                                <div class="fileM-action__right ">
+                                                                                    <div class="dropdown dropleft position-absolute">
+                                                                                        <button class="btn-link border-0 bg-transparent p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                            <img class="svg" src="<%- locals.base %>img/svg/more-vertical.svg" alt="more-vertical">
+                                                                                        </button>
+                                                                                        <div class="dropdown-menu">
+                                                                                            <a href="<%= files[index].download %>" target="_self" class="dropdown-item" ><img src="<%- locals.base %>img/svg/download.svg" alt="download" class="svg">Download</a>
+                                                                                            <button class="dropdown-item btn-message" data-messageType="URL berhasil dicopy" data-messageIcon="check-circle" onclick="copyToClipborad('<%= files[index].url %>')"><img src="<%- locals.base %>img/svg/link-2.svg" alt="link-2" class="svg">Copy</button>
+                                                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-info-delete"><img class="svg" src="<%- locals.base %>img/svg/trash-2.svg" alt="">Delete</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        <% } %>
+                                                     <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="message-wrapper"></div>
+
+<div class="modal-info-delete modal fade show" id="modal-info-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-info-body d-flex">
+                    <div class="modal-info-icon warning">
+                        <img src="<%- locals.base %>img/svg/alert-circle.svg" alt="alert-circle" class="svg">
+                    </div>
+                    <div class="modal-info-text">
+                        <h6>Apakah anda Ingin menghapus berkas ini?</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light btn-default btn-squared btn-sm" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary btn-outlined btn-sm" data-bs-dismiss="modal">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
