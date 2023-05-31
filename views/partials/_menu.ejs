@@ -109,23 +109,32 @@
                 </ul>
             </li>
 
-            <li class="has-child <%- name === 'Halaman' || name === 'Daftar Halaman' || name === 'Tambah Halaman' || name === 'Edit Halaman' ?'open':'' %>">
-                <a href="#" class="<%- name === 'Halaman' || name === 'Daftar Halaman' || name === 'Tambah Halaman' || name === 'Edit Halaman' ?'active':'' %>">
+            <% if(session.role == 'master') { %>
+            <li class="has-child <%- name === 'Halaman' || name === 'Syarat dan Ketentuan' || name === 'Kebijakan Privasi' || name === 'Syarat Pemesanan' || name === 'Informasi Terbaru' || name === 'Tentang' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Halaman' || name === 'Syarat dan Ketentuan' || name === 'Kebijakan Privasi' || name === 'Syarat Pemesanan' || name === 'Informasi Terbaru' || name === 'Tentang' ? 'active':'' %>">
                     <span class="nav-icon uil uil-copy-alt"></span>
                     <span class="menu-text"><%- __('pages-menu-title') %></span>
                     <span class="toggle-icon"></span>
                 </a>
                 <ul>
                     <li>
-                        <a href="<%- locals.base %>pages/" class="<%- name === 'Daftar Halaman' ?'active':'' %>"><%- __('news-list') %></a>
+                        <a href="<%- locals.base %>pages/terms-of-service" class="<%- name === 'Syarat dan Ketentuan' ?'active':'' %>"><%- __('pages-terms-of-service-title') %></a>
                     </li>
                     <li>
-                        <a href="<%- locals.base %>pages/add" class="<%- name === 'Tambah Halaman' ?'active':'' %>"><%- __('news-add') %></a>
+                        <a href="<%- locals.base %>pages/privacy-policy" class="<%- name === 'Kebijakan Privasi' ?'active':'' %>"><%- __('pages-privacy-policy-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>pages/terms-order" class="<%- name === 'Syarat Pemesanan' ?'active':'' %>"><%- __('pages-terms-order-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>pages/latest-informations" class="<%- name === 'Informasi Terbaru' ?'active':'' %>"><%- __('pages-latest-informations-title') %></a>
+                    </li>
+                    <li>
+                        <a href="<%- locals.base %>pages/about" class="<%- name === 'Tentang' ?'active':'' %>"><%- __('pages-tentang-title') %></a>
                     </li>
                 </ul>
             </li>
-
-            <% if(session.role == 'master') { %>
+            
             <li class="has-child <%- name === 'Halaman' || name === 'Daftar Admin' || name === 'Tambah Admin' || name === 'Edit Admin' ?'open':'' %>">
                 <a href="#" class="<%- name === 'Halaman' || name === 'Daftar Admin' || name === 'Tambah Admin' || name === 'Edit Admin' ?'active':'' %>">
                     <span class="nav-icon uil uil-user-md"></span>
@@ -150,6 +159,7 @@
                 </a>
             </li>
 
+            <% if(session.role == 'master') { %>
             <li class="has-child <%- name === 'Faq' || name === 'Daftar Faq' || name === 'Tambah Faq' || name === 'Edit Faq' ? 'open':'' %>">
                 <a href="#" class="<%- name === 'Faq' || name === 'Daftar Faq' || name === 'Tambah Faq' || name === 'Edit Faq' ?'active':'' %>">
                     <span class="nav-icon uil uil-comment-question"></span>
@@ -166,6 +176,7 @@
                     <li>
                 </ul>
             </li>
+            <% } %>
 
             <li>
                 <a href="<%- locals.base %>about" class="<%- name === 'Tentang' ? 'active':'' %>">

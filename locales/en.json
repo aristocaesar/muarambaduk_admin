@@ -234,7 +234,7 @@
   "news-menu-title": "Berita",
   "news-list": "Daftar Berita",
   "news-add": "Buat Berita",
-  "pages-menu-title": "Halaman",
+  "pages-edit-title": "Edit Halaman",
   "tickets-menu-title": "Tiket",
   "tickets-list": "Daftar Tiket",
   "tickets-add": "Tambah Tiket",
@@ -248,5 +248,11 @@
   "testimony-menu-title": "Testimoni",
   "list-testimony-title": "Daftar Testimoni",
   "add-testimony-title": "Tambah Testimoni",
-  "about-menu-title": "Tentang"
+  "about-menu-title": "Tentang",
+  "pages-menu-title": "Halaman",
+  "pages-terms-of-service-title": "Syarat dan Ketentuan",
+  "pages-privacy-policy-title": "Kebijakan Privasi",
+  "pages-terms-order-title": "Syarat Pemesanan",
+  "pages-latest-informations-title": "Informasi Terbaru",
+  "pages-tentang-title": "Tentang"
 }
