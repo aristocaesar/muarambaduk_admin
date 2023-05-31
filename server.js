@@ -34,6 +34,7 @@ const news_routes = require('./routes/news');
 const about_routes = require('./routes/about');
 const faq_routes = require('./routes/faq');
 const setting_routes = require('./routes/setting');
+const admin_routes = require('./routes/administrator');
 
 const filemanager_routes = require('./routes/filemanager');
 
@@ -100,15 +101,16 @@ app.use(BASE_URL + 'packages', packages_routes);
 app.use(BASE_URL + 'news', news_routes);
 app.use(BASE_URL + 'faq', faq_routes);
 app.use(BASE_URL + 'about', about_routes);
+app.use(BASE_URL + 'admin', admin_routes);
 app.use(BASE_URL + 'setting', setting_routes);
 
 app.use(BASE_URL + 'filemanager', filemanager_routes);
 
 app.use(localeMiddleware.activeLocale);
 
-// app.use((req, res, next) => {
-
-// })
+app.use((req, res, next) => {
+  res.redirect(`${BASE_URL}dashboard`);
+});
 
 mongoose
   .connect('mongodb://' + DB_HOST + ':' + DB_PORT + '/' + DB_NAME + '')

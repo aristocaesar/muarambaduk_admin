@@ -14,7 +14,15 @@ const isGuest = (request, response, next) => {
   next();
 };
 
+const isAdmin = (request, response, next) => {
+  if (request.session.user.role == 'default') {
+    return response.redirect(response.locals.base + 'dashboard');
+  }
+  next();
+};
+
 module.exports = {
   isAuthenticated,
   isGuest,
+  isAdmin,
 };
