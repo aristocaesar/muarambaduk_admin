@@ -29,7 +29,7 @@
                 <div class="card card-Vertical card-default card-md mb-4">
                     <div class="card-body pb-md-30">
                         <div class="Vertical-form">
-                            <form action="<%- locals.base %>pages/<%= pages.id %>" method="post">
+                            <form action="<%- locals.base %>pages/<%= pages.slug %>" method="post">
                                 <div class="form-group">
                                     <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Judul</label>
                                     <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="pages" placeholder="Syarat dan Ketentuan" value="<%= pages.pages %>" readonly required>

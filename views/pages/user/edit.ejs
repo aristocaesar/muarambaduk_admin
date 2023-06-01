@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="social-dash-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('user-edit-title') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/users"><i class="las la-home"></i>Pengguna</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('user-edit-title') %></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <% if(notification.length != 0) { %>
+                    <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                        <div class="alert-content">
+                            <p><%= notification[0].message %></p>
+                        </div>
+                    </div>
+                <% } %>
+
+                <div class="card card-Vertical card-default card-md mb-4">
+                    <div class="card-body pb-md-30">
+                        <div class="Vertical-form">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="fullname" class="color-dark fs-14 fw-500 align-center mb-10">Nama Lengkap</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="fullname" min="6" placeholder="Aristo Caesar Pratama" value="<%= user.fullname %>" readonly required>
+                                </div>
+
+                                <div class="form-group"> 
+                                    <label for="email" class="color-dark fs-14 fw-500 align-center mb-10">Email</label>
+                                    <input type="email" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="email" placeholder="hi@aristocaesar.my.id" value="<%= user.email %>" readonly required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password" class="color-dark fs-14 fw-500 align-center mb-10">Akses</label>
+                                    <div class="atbd-switch-wrap">
+                                        <div class="form-check form-switch form-switch-primary form-switch-sm">
+                                        <input type="checkbox" name="access" class="form-check-input" id="switch-s1" onchange="
+                                            const access = this.checked;
+                                            document.getElementById('labelSwitchAccess').innerText = access == true ? 'Aktif' : 'Ditangguhkan';
+                                        " <%= user.access == 'active' ? 'checked=""' : '' %> >
+                                        <label class="form-check-label" for="switch-s1"><small id="labelSwitchAccess"><%= user.access == 'active' ? 'Aktif' : 'Ditangguhkan' %></small></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layout-button flex justify-content-end mt-25">
+                                    <a href="<%- locals.base %>users" class="btn btn-default btn-squared btn-light px-35 ">Batal</a>
+                                    <button type="submit" class="btn btn-primary btn-default btn-squared px-30">Simpan Perubahan</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
