@@ -82,14 +82,6 @@
                                                         <i class="uil uil-edit"></i>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="#" class="remove" data-bs-toggle="modal" data-bs-target="#modal-info-delete" onclick="
-                                                        document.getElementById('form-action-delete').setAttribute('action', '<%- locals.base %>users/delete/<%= users[index].id %>')
-                                                        document.getElementById('title-admin-action-delete').innerText = 'Apakah anda ingin menghapus pengguna <%= users[index].fullname %> ?'; 
-                                                    ">
-                                                        <i class="uil uil-trash-alt"></i>
-                                                    </a>
-                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -125,28 +117,4 @@
             </div>
         </div>
     </div>                   
-</div>
-
-<div class="modal-info-delete modal fade show" id="modal-info-delete" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-info" role="document">
-        <div class="modal-content">
-            <form id="form-action-delete" action="" method="post">
-                <div class="modal-body">
-                    <div class="modal-info-body d-flex">
-                        <div class="modal-info-icon warning">
-                            <img src="<%- locals.base %>img/svg/alert-circle.svg" alt="alert-circle" class="svg">
-                        </div>
-                        <div class="modal-info-text">
-                            <h6 id="title-admin-action-delete">Apakah anda ingin menghapus penguna ?</h6>
-                            <p>Setelah terhapus pengguna tidak dapat dikembalikan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light btn-outlined btn-sm" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Ya, Hapus</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
