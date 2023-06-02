@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="social-dash-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('tickets-edit') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/tickets"><i class="las la-home"></i>Tiket</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('tickets-edit') %></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <% if(notification.length != 0) { %>
+                    <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                        <div class="alert-content">
+                            <p><%= notification[0].message %></p>
+                        </div>
+                    </div>
+                <% } %>
+
+                <div class="card card-Vertical card-default card-md mb-4">
+                    <div class="card-body pb-md-30">
+                        <div class="Vertical-form">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Nama</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="title" min="6" placeholder="Tanpa Berkemah" value="<%= ticket.title %>" readonly required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category" class="color-dark fs-14 fw-500 align-center mb-10">Kategori</label>
+                                    <input type="category" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="category" name="category" placeholder="Tourist" value="<%= ticket.category %> "readonly required>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="form-group col-md-6">
+                                        <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Harga Hari Biasa</label>
+                                        <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="normal_day" min="6" placeholder="Rp. 5000" value="<%= ticket.normal_day %>" oninput="toRupiah(this)" required>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Harga Hari Libur</label>
+                                        <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="weekend_day" min="6" placeholder="Rp. 5000" value="<%= ticket.weekend_day %>" oninput="toRupiah(this)" required>
+                                    </div>
+                                </div>
+
+                                <div class="layout-button flex justify-content-end mt-25">
+                                    <a href="<%- locals.base %>tickets" class="btn btn-default btn-squared btn-light px-35 ">Batal</a>
+                                    <button type="submit" class="btn btn-primary btn-default btn-squared px-30">Simpan Perubahan</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
