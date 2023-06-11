@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-main">
-                    <h4 class="text-capitalize breadcrumb-title"><%- __('edit-product-title') %></h4>
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('edit-packages-title') %></h4>
                     <div class="breadcrumb-action justify-content-center flex-wrap">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/products"><i class="las la-home"></i>Produk</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><%- __('edit-product-title') %></li>
+                                <li class="breadcrumb-item"><a href="/packages"><i class="las la-home"></i><%- __('packages-menu-title') %></a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('edit-packages-title') %></li>
                             </ol>
                         </nav>
                     </div>
@@ -32,41 +32,102 @@
                             <form action="" method="post">
                                 <div class="account-profile d-flex align-items-center mt-4 mb-5">
                                     <div class="ap-img pro_img_wrapper">
-                                        <input id="image-file-upload" type="text" name="image" value="<%= product.image %>" class="d-none">
+                                        <input id="image-file-upload" type="text" name="image" value="https://api.muarambaduk.biz.id/static/uploads/default-product.png" class="d-none">
                                         <input id="file-upload" type="file" class="d-none">
                                         <label for="file-upload">
-                                            <img class="ap-img__main rounded-circle wh-120 bg-lighter d-flex" src="<%= product.image %>" alt="profile">
+                                            <img class="ap-img__main rounded-circle wh-120 bg-lighter d-flex" src="<%= packages.image %>" alt="profile">
                                             <span class="cross" id="remove_pro_pic">
                                                 <img src="<%- locals.base %>img/svg/camera.svg" alt="camera" class="svg">
                                             </span>
                                         </label>
                                     </div>
                                     <div class="account-profile__title">
-                                        <h6 class="fs-15 ms-20 fw-500 text-capitalize">Foto produk</h6>
+                                        <h6 class="fs-15 ms-20 fw-500 text-capitalize">Foto paket</h6>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Nama Produk</label>
-                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="title" placeholder="Tenda Premium 4 Orang" value="<%= product.title %>" oninput="productSetSlug(this)" required>
+                                    <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Nama Paket</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="title" placeholder="Paket Premium Special Kaps. 6 Orang" oninput="productSetSlug(this)" value="<%= packages.title %>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="slug" class="color-dark fs-14 fw-500 align-center mb-10">Slug</label>
-                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="slug" name="slug" placeholder="tenda-premium-4-orang" value="<%= product.slug %>" readonly required>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="slug" name="slug" placeholder="paket-premium-special-kaps-6-orang" value="<%= packages.slug %>" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoryOption" class="color-dark fs-14 fw-500 align-center mb-10">Kategori</label>
+                                    <select id="categoryOption" class="form-control py-3" name="category" autocomplete="off">
+                                        <option value="general" <%= packages.category == 'General' ? 'selected="selected"' : 
+                                        '' %>>Umum - Dapat dibeli oleh semua wisatawan</option>
+                                        <option value="custom" <%= packages.category == 'Custom' ? 'selected="selected"' : 
+                                        '' %>>Kustom - Hanya dapat dibeli oleh wisatawan yang telah ditentukan</option>
+                                      </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="description" class="color-dark fs-14 fw-500 align-center mb-10">Deskripsi</label>
-                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="Tenda premium 4 orang merupakan ..." required><%= product.description %></textarea>
+                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="Paket Premium Special Kaps. 6 Orang merupakan ..." required><%= packages.description %></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="price" class="color-dark fs-14 fw-500 align-center mb-10">Harga Sewa</label>
-                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="price" name="price" placeholder="Rp. 60.000" oninput="toRupiah(this)" value="<%= product.price %>" required>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="price" name="price" placeholder="Rp. 100.000" oninput="toRupiah(this)" value="<%= packages.price %>" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="compensation" class="color-dark fs-14 fw-500 align-center mb-10">Harga Ganti Rugi</label>
-                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="compensation" name="compensation" placeholder="Rp. 250.000" oninput="toRupiah(this)" value="<%= product.compensation %>" required>
+                                <div class="product-list">
+                                    <div class="breadcrumb-main">
+                                        <h4 class="text-capitalize breadcrumb-title">Item</h4>
+                                        <a href="#" class="btn px-15 btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add-item" onclick="getProductsNotAvaible('<%= packages.id %>')">
+                                            <i class="las la-plus fs-16"></i>Tambah Item
+                                        </a>
+                                    </div>
+                                    <div class="products row">
+                                        <% if(packages.products.length == 0) { %>
+                                            <div class="col-12 py-20">
+                                                <p class="text-center">Tidak Ada Item!</p>
+                                            </div>
+                                        <% } else { %>
+                                            <% for(let i = 0; i < packages.products.length; i++) { %>
+                                                <div class="col-12 col-md-6 mb-20">
+                                                    <div class="files-area d-flex justify-content-between align-items-center">
+                                                        <div class="files-area__left d-flex align-items-center">
+                                                            <div class="files-area__img">
+                                                                <img src="<%= packages.products[i].image %>" alt="img" width="100" class="rounded">
+                                                            </div>
+                                                            <div class="files-area__title">
+                                                                <p class="mb-0 fs-14 fw-500 color-dark text-capitalize"><%= packages.products[i].title %></p>
+                                                                <span class="color-light fs-12 d-flex ">Kuantitas : <%= packages.products[i].quantity %></span>
+                                                                <div>
+                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-item" class="btn-link" onclick="
+                                                                        document.getElementById('form-edit-item-package').setAttribute('action', `/packages/<%= packages.id %>/update-product/<%= packages.products[i].id %>`);
+
+                                                                        document.getElementById('image-edit-item-package').setAttribute('src', `<%= packages.products[i].image %>`);
+
+                                                                        document.getElementById('title-edit-item-package').value = '<%= packages.products[i].title %>';
+
+                                                                        document.getElementById('label-edit-item-package').innerText = '<%= packages.products[i].title %>';
+
+                                                                        document.getElementById('quantity-edit-item-package').value = '<%= packages.products[i].quantity %>';
+                                                                    ">
+                                                                        <small>Edit</small>
+                                                                    </a>
+                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-info-delete" class="btn-link text-danger" onclick="
+                                                                        document.getElementById('form-action-delete').setAttribute('action', '/packages/<%= packages.id %>/delete-product/<%= packages.products[i].id %>')
+
+                                                                        document.getElementById('title-product-action-delete').value = '<%= packages.products[i].title %>'
+
+                                                                        document.getElementById('label-product-action-delete').innerText = 'Apakah anda ingin menghapus item <%= packages.products[i].title %> ?'
+                                                                    ">
+                                                                        <small>Hapus</small>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        <% } %>
+                                     </div>
+                                     
                                 </div>
                                 <div class="layout-button flex justify-content-end mt-25">
-                                    <a href="<%- locals.base %>products" class="btn btn-default btn-squared btn-light px-35 ">Batal</a>
+                                    <a href="<%- locals.base %>packages" class="btn btn-default btn-squared btn-light px-35 ">Batal</a>
                                     <button type="submit" class="btn btn-primary btn-default btn-squared px-30">Simpan Perubahan</button>
                                 </div>
                             </form>
@@ -74,6 +135,89 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-basic modal fade show" id="modal-add-item" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content modal-bg-white ">
+            <div class="modal-header">
+                <h6 class="modal-title">Tambah Item</h6>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="<%- locals.base %>img/svg/x.svg" alt="x" class="svg">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="list-products-loading" class="d-flex justify-content-center">
+                    <div class="dm-spin-dots spin-lg">
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                        <span class="spin-dot badge-dot dot-primary"></span>
+                    </div>
+                </div>
+                <div id="list-products-not-avaible" class="d-none">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-basic modal fade show" id="modal-edit-item" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content modal-bg-white ">
+            <div class="modal-header">
+                <h6 class="modal-title">Edit Item</h6>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="<%- locals.base %>img/svg/x.svg" alt="x" class="svg">
+                </button>
+            </div>
+            <form method="post" action="" id="form-edit-item-package" class="col-12 my-3">
+                <div class="modal-body">
+                    <div class="files-area d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                          <div class="files-area__img">
+                              <img alt="img" width="100" id="image-edit-item-package" class="rounded">
+                          </div>
+                          <div class="files-area__title">
+                              <input type="text" class="d-none" name="title" value="" id="title-edit-item-package">
+                              <p class="mb-0 fs-14 fw-500 color-dark text-capitalize" id="label-edit-item-package"></p>
+                              <span class="color-light fs-12 d-flex my-2">Kuantitas</span>
+                              <input type="number" id="quantity-edit-item-package" class="form-control" placeholder="0" name="quantity" oninput="inputNumberOnly(this)" required />
+                          </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-light btn-sm" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-info-delete modal fade show" id="modal-info-delete" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <form id="form-action-delete" action="" method="post">
+                <div class="modal-body">
+                    <div class="modal-info-body d-flex">
+                        <div class="modal-info-icon warning">
+                            <img src="<%- locals.base %>img/svg/alert-circle.svg" alt="alert-circle" class="svg">
+                        </div>
+                        <div class="modal-info-text">
+                            <input type="text" id="title-product-action-delete" name="title" class="d-none">
+                            <h6 id="label-product-action-delete">Apakah anda ingin menghapus item ini ?</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-outlined btn-sm" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Ya, Hapus</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

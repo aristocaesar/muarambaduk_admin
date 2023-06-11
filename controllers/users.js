@@ -6,6 +6,7 @@ const UserModel = (user) => {
     fullname: user.fullname,
     email: user.email,
     access: user.access,
+    image: user.images,
     created_at: user.created_at,
     updated_at: user.updated_at,
   };
