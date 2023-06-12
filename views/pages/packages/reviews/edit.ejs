@@ -1,0 +1,102 @@
+<div class="container-fluid">
+    <div class="social-dash-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('edit-review-packages-title') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/packages/review"><i class="las la-home"></i>Review</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('edit-review-packages-title') %></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <% if(notification.length != 0) { %>
+                    <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                        <div class="alert-content">
+                            <p><%= notification[0].message %></p>
+                        </div>
+                    </div>
+                <% } %>
+
+                <div class="card card-Vertical card-default card-md mb-4">
+                    <div class="card-body pb-md-30">
+                        <div class="Vertical-form">
+                            <form>
+                                <div class="account-profile d-flex align-items-center mt-4 mb-5">
+                                    <div class="ap-img pro_img_wrapper">
+                                        <input id="file-upload" type="file" class="d-none">
+                                        <label for="file-upload">
+                                            <img class="ap-img__main rounded-circle wh-120 bg-lighter d-flex" src="<%= review.images %>" alt="profile">
+                                            <span class="cross" id="remove_pro_pic">
+                                                <img src="<%- locals.base %>img/svg/camera.svg" alt="camera" class="svg">
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="account-profile__title">
+                                        <h6 class="fs-15 ms-20 fw-500 text-capitalize"><%= review.fullname %></h6>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="color-dark fs-14 fw-500 align-center mb-10">Nama Paket</label>
+                                    <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" id="title" name="title" placeholder="Paket Standart 2" value="<%= review.package_name %>" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="star" class="color-dark fs-14 fw-500 align-center mb-10">Rating</label>
+                                    <% for(let i = 0; 5 > i; i++) { %>
+                                        <% if(i < review.star) { %>
+                                            <i class="fas fa-star text-warning"></i>
+                                        <% } else { %>
+                                            <i class="fas fa-star text-muted"></i>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="color-dark fs-14 fw-500 align-center mb-10">Ulasan</label>
+                                    <textarea class="form-control" name="description" id="description" rows="5" placeholder="Paket ini sangat menarik dan pelayananya sangat bagus ..." required readonly><%= review.description %></textarea>
+                                </div>
+                                <div class="layout-button flex justify-content-end mt-25">
+                                    <a href="<%- locals.base %>packages/review" class="btn btn-default btn-squared btn-light px-35 ">Kembali</a>
+                                    <button type="button" class="btn btn-danger btn-default btn-squared px-30" data-bs-toggle="modal" data-bs-target="#modal-delete-review" onclick="
+                                        document.getElementById('form-delete-review').setAttribute('action', '/packages/review/delete/<%= review.id %>')
+                                    ">Hapus</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-info-delete modal fade show" id="modal-delete-review" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <form id="form-delete-review" action="" method="post">
+                <div class="modal-body">
+                    <div class="modal-info-body d-flex">
+                        <div class="modal-info-icon warning">
+                            <img src="<%- locals.base %>img/svg/alert-circle.svg" alt="alert-circle" class="svg">
+                        </div>
+                        <div class="modal-info-text">
+                            <h6 id="title-review-action-delete">Apakah anda ingin menghapus review ini ?</h6>
+                            <p>Setelah terhapus review tidak dapat dikembalikan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Ya,Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

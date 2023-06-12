@@ -23,8 +23,8 @@
                 </ul>
             </li>
 
-            <li class="has-child <%- name === 'Paket' || name === 'Daftar Paket' || name === 'Tambah Paket' || name === 'Edit Paket' || name === 'Kustom Paket' || name === 'Review Paket' ? 'open':'' %>">
-                <a href="#" class="<%- name === 'Paket' || name === 'Daftar Paket' || name === 'Tambah Paket' || name === 'Edit Paket' || name === 'Kustom Paket' || name === 'Review Paket' ?'active':'' %>">
+            <li class="has-child <%- name === 'Paket' || name === 'Daftar Paket' || name === 'Tambah Paket' || name === 'Edit Paket' || name === 'Kustom Paket' || name === 'Review Paket' || name === 'Edit Review Paket' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Paket' || name === 'Daftar Paket' || name === 'Tambah Paket' || name === 'Edit Paket' || name === 'Kustom Paket' || name === 'Review Paket' || name === 'Edit Review Paket' ? 'active':'' %>">
                     <span class="nav-icon uil uil-layers"></span>
                     <span class="menu-text"><%- __('packages-menu-title') %></span>
                     <span class="toggle-icon"></span>
@@ -55,13 +55,16 @@
                 </ul>
             </li>
 
-            <li class="has-child <%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Buat Transaksi' ? 'open':'' %>">
-                <a href="#" class="<%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Buat Transaksi' ?'active':'' %>">
+            <li class="has-child <%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Cek Transaksi' || name === 'Buat Transaksi' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Cek Transaksi' || name === 'Buat Transaksi' ?'active':'' %>">
                     <span class="nav-icon uil uil-credit-card"></span>
                     <span class="menu-text"><%- __('transaction-menu-title') %></span>
                     <span class="toggle-icon"></span>
                 </a>
                 <ul>
+                    <li>
+                        <a href="<%- locals.base %>transaction/check" class="<%- name === 'Cek Transaksi' ?'active':'' %>"><%- __('check-transaction-title') %></a>
+                    </li>
                     <li>
                         <a href="<%- locals.base %>transaction" class="<%- name === 'Daftar Transaksi' ?'active':'' %>"><%- __('list-transaction-title') %></a>
                     </li>

@@ -56,4 +56,16 @@ router.get(
   PackageController.showReview
 );
 
+router.get(
+  '/review/edit/:id',
+  authMiddleware.isAuthenticated,
+  PackageController.editViewReview
+);
+
+router.post(
+  '/review/delete/:id',
+  authMiddleware.isAuthenticated,
+  PackageController.deleteReview
+);
+
 module.exports = router;

@@ -17,6 +17,21 @@ const PackagesModel = (pkg) => {
   };
 };
 
+const ReviewModel = (review) => {
+  return {
+    id: review.id,
+    package: review.package,
+    package_name: review.package_name,
+    payment: review.payment,
+    fullname: review.fullname,
+    images: review.images,
+    star: review.star,
+    description: review.description,
+    created_at: review.created_at,
+    updated_at: review.updated_at,
+  };
+};
+
 // Function allow only number
 function toNumber(value) {
   return parseInt(value.replace(/\D/g, ''));
@@ -276,7 +291,7 @@ const showReview = async (request, response, next) => {
   const search = request.query.search == undefined ? '' : request.query.search;
 
   let _reviews = await AxiosProvider.get(`reviews`).then((reviews) =>
-    reviews.data.map((review) => review)
+    reviews.data.map((review) => ReviewModel(review))
   );
 
   response.render('../views/pages/packages/reviews/index', {
@@ -286,6 +301,50 @@ const showReview = async (request, response, next) => {
     reviews: _reviews,
     notification: request.flash('notification'),
   });
+};
+
+const editViewReview = async (request, response, next) => {
+  const { id } = request.params;
+
+  const _review = await AxiosProvider.get(`reviews/${id}`).then((review) =>
+    ReviewModel(review.data)
+  );
+
+  if (_review.length == 0) {
+    response.redirect('/review');
+  } else {
+    response.render('../views/pages/packages/reviews/edit', {
+      title: 'Edit Review Paket',
+      name: 'Edit Review Paket',
+      review: _review,
+      notification: request.flash('notification'),
+    });
+  }
+};
+
+const deleteReview = async (request, response, next) => {
+  const { id } = request.params;
+
+  let notif = {
+    type: null,
+    message: null,
+  };
+
+  await AxiosProvider.delete(`reviews/${id}`)
+    .then(() => {
+      notif.type = 'success';
+      notif.message = 'Berhasil menghapus review';
+    })
+    .catch((error) => {
+      notif.type = 'danger';
+      notif.message = error.errors.message;
+    });
+
+  request.flash('notification', {
+    type: notif.type,
+    message: notif.message,
+  });
+  response.redirect(`/packages/review`);
 };
 
 module.exports = {
@@ -300,4 +359,6 @@ module.exports = {
   deleteProduct,
   deletePackage,
   showReview,
+  editViewReview,
+  deleteReview,
 };
