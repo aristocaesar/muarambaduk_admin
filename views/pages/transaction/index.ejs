@@ -1,0 +1,153 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="breadcrumb-main user-member justify-content-sm-between ">
+                <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
+                    <div class="d-flex align-items-center user-member__title justify-content-center me-sm-25">
+                        <h4 class="text-capitalize fw-500 breadcrumb-title">Daftar Transaksi</h4>
+                    </div>
+                    <form action="<%- locals.base %>products" method="get" class="d-flex align-items-center user-member__form my-sm-0 my-2">
+                        <img src="<%- locals.base %>img/svg/search.svg" alt="search" class="svg">
+                        <input class="form-control me-sm-2 border-0 box-shadow-none" type="search" name="search" placeholder="Cari berdasarkan ID order" aria-label="Search" value="<%= keyword %>">
+                    </form>
+                </div>
+                <div class="action-btn">
+                    <a href="<%- locals.base %>transaction/create" class="btn px-15 btn-primary">
+                        <i class="las la-plus fs-16"></i>Buat Transaksi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <% if(notification.length != 0) { %>
+            <div class="col-lg-12 mb-3">
+                    <div class=" alert alert-<%= notification[0].type %> " role="alert">
+                        <div class="alert-content">
+                            <p><%= notification[0].message %></p>
+                        </div>
+                    </div>
+            </div>
+        <% } %>
+        <div class="col-lg-12">
+            <div class="userDatatable global-shadow border-0 p-30 bg-white radius-xl w-100 mb-30">
+                <div class="table-responsive">
+                    <table class="table mb-0 table-borderless">
+                        <thead>
+                            <tr class="userDatatable-header">
+                                <th>
+                                    <span class="userDatatable-title">No</span>
+                                </th>
+                                <th>
+                                    <span class="userDatatable-title">ID Order</span>
+                                </th>
+                                <th>
+                                    <span class="userDatatable-title">Total</span>
+                                </th>
+                                <th>
+                                    <span class="userDatatable-title">Tipe Pembayaran</span>
+                                </th>
+                                <th>
+                                    <span class="userDatatable-title">Status Pembayaran</span>
+                                </th>
+                                <th>
+                                    <span class="userDatatable-title float-end">Aksi</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <%if (transactions.length === 0) { %>
+                                <tr>
+                                    <td colspan="7"><p class="text-center">Tidak ada produk !</p></td>
+                                 </tr>
+                            <% }else{ %>
+                                <% for(var index=0; index < transactions.length; index++) { %>
+
+                                    <tr>
+                                        <td>
+                                            <%= index+1 %>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="userDatatable-inline-title">
+                                                    <a href="<%- locals.base %>transaction/detail/<%= transactions[index].id %>" class="text-dark fw-500">
+                                                        <h6><%= transactions[index].order_id %></h6>
+                                                    </a>
+                                                    <p class="d-block mb-0">
+                                                        <%= transactions[index].date %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small><%= transactions[index].gross_amount %></small>
+                                        </td>
+                                        <td>
+                                            <small><%= transactions[index].type.toUpperCase() %></small>
+                                        </td>
+                                        <td>
+                                            <% if(transactions[index].status == 'pending') { %>
+                                                <div class="dm-badge-text">
+                                                    <span class="badge-dot dot-info"></span>
+                                                    <span>Menunggu Pembayaran</span>
+                                                </div>
+                                            <% } else if(transactions[index].status == 'settlement') { %>
+                                                <div class="dm-badge-text">
+                                                    <span class="badge-dot dot-success"></span>
+                                                    <span>Pembayaran Berhasil</span>
+                                                </div>
+                                            <% } else if(transactions[index].status == 'expire' || transactions[index].status == 'deny' || transactions[index].status == 'cancel') { %>
+                                                <div class="dm-badge-text">
+                                                    <span class="badge-dot dot-danger"></span>
+                                                    <span>
+                                                        <%=
+                                                            transactions[index].status == 'expire' ? 'Pembayaran Telah Berakhir' : 
+                                                            transactions[index].status == 'deny' || transactions[index].status == 'cancel' ? 'Pembayaran dibatalkan' : ''
+                                                        %>
+                                                    </span>
+                                                </div>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
+                                                <li>
+                                                    <a href="<%- locals.base %>transaction/detail/<%= transactions[index].id %>" class="edit">
+                                                        <i class="uil uil-edit"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                <% } %>
+                            <% } %>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-end pt-30">
+                    <nav class="dm-page ">
+                        <ul class="dm-pagination d-flex">
+                            <li class="dm-pagination__item">
+                                <a href="#" class="dm-pagination__link pagination-control"><span class="la la-angle-left"></span></a>
+                                <a href="#" class="dm-pagination__link active"><span class="page-number">1</span></a>
+                                <a href="#" class="dm-pagination__link pagination-control"><span class="la la-angle-right"></span></a>
+                                <a href="#" class="dm-pagination__option">
+                                </a>
+                            </li>
+                            <li class="dm-pagination__item">
+                                <div class="paging-option">
+                                    <select name="page-number" class="page-selection">
+                                        <option value="20">20</option>
+                                        <option value="40">40</option>
+                                        <option value="60">60</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>                   
+</div>

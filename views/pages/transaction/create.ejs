@@ -1,0 +1,96 @@
+<div class="container-fluid">
+    <div class="social-dash-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-main">
+                    <h4 class="text-capitalize breadcrumb-title"><%- __('add-transaction-title') %></h4>
+                    <div class="breadcrumb-action justify-content-center flex-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/transaction"><i class="las la-home"></i>Transaksi</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><%- __('add-transaction-title') %></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <div class=" checkout wizard6 global-shadow border-0 px-sm-50 px-20 pt-sm-50 py-30 mb-30 bg-white radius-xl w-100">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8">
+                            <div class="checkout-progress-indicator content-center">
+                                <div class="checkout-progress">
+                                    <div class="step current" id="1">
+                                        <span><img class="svg" src="<%- locals.base %>img/svg/userExtra.svg" alt=""> </span>
+                                        <span>Pilih Pemesan</span>
+                                    </div>
+                                    <div class="current"><img src="<%- locals.base %>img/svg/checkout.svg" alt="img" class="svg"></div>
+                                    <div class="step" id="2">
+                                        <span><img class="svg" src="<%- locals.base %>img/svg/address.svg" alt=""></span>
+                                        <span>Tanggal dan Paket</span>
+                                    </div>
+                                    <div class="current"><img src="<%- locals.base %>img/svg/checkout.svg" alt="img" class="svg"></div>
+                                    <div class="step" id="3">
+                                        <span><img class="svg" src="<%- locals.base %>img/svg/155-credit-card.svg" alt=""></span>
+                                        <span>Pembayaran</span>
+                                    </div>
+                                    <div class="current"><img src="<%- locals.base %>img/svg/checkout.svg" alt="img" class="svg"></div>
+                                    <div class="step" id="4">
+                                        <span><img class="svg" src="<%- locals.base %>img/svg/024-like.svg" alt=""></span>
+                                        <span>Konfirmasi Pemesanan</span>
+                                    </div>
+                                </div>
+                            </div><!-- checkout -->
+                            <div class="row justify-content-center">
+                                <div class="col-xl-7 col-lg-8 col-sm-10">
+                                    <div class="card checkout-shipping-form shadow-none border-0 shadow-none">
+                                        <div class="card-header border-bottom-0 align-content-start pb-sm-0 pb-1">
+                                            <h4 class="fw-500">1. Masukkan nama atau email pemesan</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="edit-profile__body">
+                                                <form method="get" action="">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="name_email" name="search" placeholder="Masukkan nama atau email" value="<%= keyword %>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <% if(users.length != 0) { %>
+                                                        <% for(let index = 0; index < users.length; index++) { %>
+                                                            <div class="col-12 mb-25">
+                                                                <div class="media  py-30  ps-30 pe-20 bg-white radius-xl users-list ">
+                                                                   <img class=" me-20 rounded-circle wh-80 bg-opacity-primary  " src="<%= users[index].images %>" alt="Generic placeholder image">
+                                                                   <div class="media-body d-xl-flex users-list-body">
+                                                                      <div class="flex-1 pe-xl-30 users-list-body__title">
+                                                                         <h6 class="mt-0 fw-500"><%= users[index].fullname %> </h6>
+                                                                         <span><%= users[index].email %> </span>
+                                                                      </div>
+                                                                      <div class="users-list__button mt-xl-0 mt-15">
+                                                                         <button class="btn btn-primary btn-default btn-squared text-capitalize px-20 mb-10 global-shadow">Pilih
+                                                                         </button>
+                                                                      </div>
+                                                                   </div>
+                                                                </div>
+                                                             </div>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                        <p class="my-5 text-center">Pemesan tidak ditemukan!</p>
+                                                    <% } %>
+                                                    </div>
+                                                    <div class=" d-flex pt-20 mb-20 justify-content-md-end justify-content-center">
+                                                        <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize text-white">Cari</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div><!-- ends: card -->
+                                </div><!-- ends: col -->
+                            </div>
+                        </div><!-- ends: col -->
+                    </div>
+                </div><!-- End: .global-shadow-->
+            </div>
+        </div>
+    </div>
+</div>

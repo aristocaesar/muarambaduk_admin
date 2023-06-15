@@ -55,8 +55,8 @@
                 </ul>
             </li>
 
-            <li class="has-child <%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Cek Transaksi' || name === 'Buat Transaksi' ? 'open':'' %>">
-                <a href="#" class="<%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Cek Transaksi' || name === 'Buat Transaksi' ?'active':'' %>">
+            <li class="has-child <%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Cek Transaksi' || name === 'Buat Transaksi' || name === 'Detail Transaksi' ? 'open':'' %>">
+                <a href="#" class="<%- name === 'Transaksi' || name === 'Daftar Transaksi' || name === 'Cek Transaksi' || name === 'Buat Transaksi' || name === 'Detail Transaksi' ?'active':'' %>">
                     <span class="nav-icon uil uil-credit-card"></span>
                     <span class="menu-text"><%- __('transaction-menu-title') %></span>
                     <span class="toggle-icon"></span>
@@ -69,10 +69,10 @@
                         <a href="<%- locals.base %>transaction" class="<%- name === 'Daftar Transaksi' ?'active':'' %>"><%- __('list-transaction-title') %></a>
                     </li>
                     <li>
-                        <a href="<%- locals.base %>transaction/add" class="<%- name === 'Buat Transaksi' ?'active':'' %>"><%- __('add-transaction-title') %></a>
+                        <a href="<%- locals.base %>transaction/create" class="<%- name === 'Buat Transaksi' ?'active':'' %>"><%- __('add-transaction-title') %></a>
                     </li>
                     <li>
-                        <a href="https://dashboard.midtrans.com/login" target="_blank">Monitor Pembayaran</a>
+                        <a href="https://dashboard.midtrans.com/login" target="_blank">Monitor Keuangan</a>
                     </li>
                 </ul>
             </li>
